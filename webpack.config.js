@@ -2,9 +2,11 @@ const path = require('path');
 const dev = process.env.NODE_ENV !== "production";
 const { BundleAnalyzerPlugin } = require( "webpack-bundle-analyzer" );
 const FriendlyErrorsWebpackPlugin = require( "friendly-errors-webpack-plugin" );
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const plugins = [
-  new FriendlyErrorsWebpackPlugin()
+  new FriendlyErrorsWebpackPlugin(),
+  new ExtractTextPlugin("styles.css")
 ];
 
 if (dev) {
@@ -30,18 +32,39 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[name]-[local]___[hash:base64:5]'
+              }
+            }
+        })
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ["env", "react"]
-        }
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
       },
       {
         test: /\.json$/,
         exclude: /node_modules/,
-        loader: 'json-loader'
-      }]
+        use: [
+          {
+            loader: 'json-loader'
+          }
+        ]
+      }
+    ]
   },
   plugins
 };

@@ -4,6 +4,8 @@ require( "babel-register" )( {
   presets: [ "env", "react" ],
 } );
 
+require('css-modules-require-hook/preset');
+
 /**
  * Module dependencies.
  */

@@ -27500,6 +27500,10 @@ var _routes = __webpack_require__(/*! ../../config/routes */ "./config/routes.js
 
 var _routes2 = _interopRequireDefault(_routes);
 
+var _layout = __webpack_require__(/*! ./layout.css */ "./src/components/layout.css");
+
+var _layout2 = _interopRequireDefault(_layout);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27530,12 +27534,12 @@ var Layout = function (_React$Component) {
         null,
         _react2.default.createElement(
           "h1",
-          null,
+          { className: _layout2.default.title },
           this.state.title
         ),
         _react2.default.createElement(
           "div",
-          null,
+          { className: "test" },
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: "/" },
@@ -27562,6 +27566,18 @@ var Layout = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Layout;
+
+/***/ }),
+
+/***/ "./src/components/layout.css":
+/*!***********************************!*\
+  !*** ./src/components/layout.css ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"title":"layout-title___aufo9"};
 
 /***/ }),
 

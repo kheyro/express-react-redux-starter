@@ -57,6 +57,7 @@ function htmlTemplate( reactDom, reduxState ) {
     <head>
         <meta charset="utf-8">
         <title>React SSR</title>
+        <link rel="stylesheet" type="text/css" href="./styles.css">
     </head>
 
     <body>
