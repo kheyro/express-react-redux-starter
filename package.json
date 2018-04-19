@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kheyro/express-react-starter.git"
+    "url": "https://github.com/kheyro/express-react-redux-starter.git"
   },
   "author": "Denis Atkesone",
   "license": "Apache License 2.0",
