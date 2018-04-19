@@ -20,11 +20,13 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "json-loader": "^0.5.7",
     "mocha": "^5.1.0",
     "nodemon": "^1.17.3",
     "supertest": "^3.0.0",
     "webpack": "^4.6.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.14"
   },
   "dependencies": {
