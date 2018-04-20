@@ -4,6 +4,8 @@ const { BundleAnalyzerPlugin } = require( "webpack-bundle-analyzer" );
 const FriendlyErrorsWebpackPlugin = require( "friendly-errors-webpack-plugin" );
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const ASSET_PATH = process.env.ASSET_PATH || './build/';
+
 const plugins = [
   new FriendlyErrorsWebpackPlugin(),
   new ExtractTextPlugin("styles.css")
@@ -27,7 +29,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    publicPath: ASSET_PATH
   },
   module: {
     rules: [
