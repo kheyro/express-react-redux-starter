@@ -1,36 +1,35 @@
 const path = require('path');
-const dev = process.env.NODE_ENV !== "production";
-const { BundleAnalyzerPlugin } = require( "webpack-bundle-analyzer" );
-const FriendlyErrorsWebpackPlugin = require( "friendly-errors-webpack-plugin" );
+
+const dev = process.env.NODE_ENV !== 'production';
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || './build/';
 
 const plugins = [
   new FriendlyErrorsWebpackPlugin(),
-  new ExtractTextPlugin("styles.css")
+  new ExtractTextPlugin('styles.css'),
 ];
 
 if (dev) {
-  plugins.push(
-    new BundleAnalyzerPlugin({
-      analyzerMode: "static",
-      reportFilename: "./webpack-report.html",
-      openAnalyzer: false,
-    })
-  );
+  plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    reportFilename: './webpack-report.html',
+    openAnalyzer: false,
+  }));
 }
 
 module.exports = {
   mode: dev ? 'development' : 'production',
-  devtool: dev ? "none" : "source-map",
+  devtool: dev ? 'none' : 'source-map',
   entry: {
-    app: './src/client.js'
+    app: './src/client.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].bundle.js',
-    publicPath: ASSET_PATH
+    publicPath: ASSET_PATH,
   },
   module: {
     rules: [
@@ -39,35 +38,41 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[name]-[local]___[hash:base64:5]'
-              }
-            }
-        })
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]-[local]___[hash:base64:5]',
+            },
+          },
+        }),
+      },
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader"
-          }
-        ]
+            loader: 'babel-loader',
+          },
+        ],
       },
       {
         test: /\.json$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'json-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'json-loader',
+          },
+        ],
+      },
+    ],
   },
-  plugins
+  plugins,
 };
