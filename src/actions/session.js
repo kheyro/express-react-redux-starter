@@ -1,3 +1,5 @@
-export const initializeSession = ( ) => ( {
-  type: "INITIALIZE_SESSION",
-} );
+const initializeSession = () => ({
+  type: 'INITIALIZE_SESSION',
+});
+
+export default initializeSession;

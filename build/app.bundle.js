@@ -96,11 +96,11 @@ var _About2 = _interopRequireDefault(_About);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = [{
-  path: "/",
+  path: '/',
   component: _Home2.default,
   exact: true
 }, {
-  path: "/about",
+  path: '/about',
   component: _About2.default,
   exact: true
 }];
@@ -27234,24 +27234,25 @@ module.exports = function(originalModule) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchData = undefined;
 
 var _api = __webpack_require__(/*! ../api */ "./src/api.js");
 
 var storeData = function storeData(data) {
   return {
-    type: "STORE_DATA",
+    type: 'STORE_DATA',
     data: data
   };
 };
 
-var fetchData = exports.fetchData = function fetchData() {
+var fetchData = function fetchData() {
   return function (dispatch) {
     return (0, _api.fetchCircuits)().then(function (res) {
       return dispatch(storeData(res));
     });
   };
 };
+
+exports.default = fetchData;
 
 /***/ }),
 
@@ -27268,7 +27269,7 @@ var fetchData = exports.fetchData = function fetchData() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchCircuits = fetchCircuits;
+exports.default = fetchCircuits;
 
 var _isomorphicFetch = __webpack_require__(/*! isomorphic-fetch */ "./node_modules/isomorphic-fetch/fetch-npm-browserify.js");
 
@@ -27277,7 +27278,7 @@ var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function fetchCircuits() {
-  return (0, _isomorphicFetch2.default)("http://ergast.com/api/f1/2018/circuits.json").then(function (res) {
+  return (0, _isomorphicFetch2.default)('http://ergast.com/api/f1/2018/circuits.json').then(function (res) {
     return res.json();
   }).then(function (res) {
     return res.MRData.CircuitTable.Circuits;
@@ -27330,7 +27331,7 @@ var jsx = _react2.default.createElement(
   )
 );
 
-_reactDom2.default.hydrate(jsx, document.getElementById("app"));
+_reactDom2.default.hydrate(jsx, document.getElementById('app'));
 
 /***/ }),
 
@@ -27408,40 +27409,40 @@ var Home = function (_React$Component) {
   }
 
   _createClass(Home, [{
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.circuits.length <= 0) {
         this.props.fetchData();
       }
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var circuits = this.props.circuits;
 
 
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
         _react2.default.createElement(
-          "h2",
+          'h2',
           null,
-          "F1 2018 Season Calendar"
+          'F1 2018 Season Calendar'
         ),
         _react2.default.createElement(
-          "ul",
+          'ul',
           null,
           circuits.map(function (_ref) {
             var circuitId = _ref.circuitId,
                 circuitName = _ref.circuitName,
                 Location = _ref.Location;
             return _react2.default.createElement(
-              "li",
+              'li',
               { key: circuitId },
               circuitName,
-              " - ",
+              ' - ',
               Location.locality,
-              ", ",
+              ', ',
               Location.country
             );
           })
@@ -27449,7 +27450,7 @@ var Home = function (_React$Component) {
       );
     }
   }], [{
-    key: "serverFetch",
+    key: 'serverFetch',
     value: function serverFetch() {
       return _actions.fetchData;
     }
@@ -27521,34 +27522,34 @@ var Layout = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this));
 
     _this.state = {
-      title: "Welcome to React SSR!"
+      title: 'Welcome to React SSR!'
     };
     return _this;
   }
 
   _createClass(Layout, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
         _react2.default.createElement(
-          "h1",
+          'h1',
           { className: _layout2.default.title },
           this.state.title
         ),
         _react2.default.createElement(
-          "div",
-          { className: "test" },
+          'div',
+          { className: 'test' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: "/" },
-            "Home"
+            { to: '/' },
+            'Home'
           ),
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: "/about" },
-            "About"
+            { to: '/about' },
+            'About'
           )
         ),
         _react2.default.createElement(
@@ -27602,7 +27603,7 @@ var dataReducer = function dataReducer() {
   var action = arguments[1];
 
   switch (action.type) {
-    case "STORE_DATA":
+    case 'STORE_DATA':
       return action.data;
     default:
       return state;
@@ -27614,7 +27615,7 @@ var sessionReducer = function sessionReducer() {
   var action = arguments[1];
 
   switch (action.type) {
-    case "INITIALIZE_SESSION":
+    case 'INITIALIZE_SESSION':
       return true;
     default:
       return state;
