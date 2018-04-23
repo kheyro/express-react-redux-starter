@@ -4,20 +4,31 @@ const dev = process.env.NODE_ENV !== 'production';
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const EslintFormatterPretty = require('eslint-formatter-pretty');
 
 const ASSET_PATH = process.env.ASSET_PATH || './build/';
 
 const plugins = [
   new FriendlyErrorsWebpackPlugin(),
   new ExtractTextPlugin('styles.css'),
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      eslint: {
+        formatter: EslintFormatterPretty,
+      },
+    },
+  }),
 ];
 
 if (dev) {
-  plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
-    reportFilename: './webpack-report.html',
-    openAnalyzer: false,
-  }));
+  plugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: './webpack-report.html',
+      openAnalyzer: false,
+    })
+  );
 }
 
 module.exports = {
